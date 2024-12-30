@@ -2,6 +2,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface WorkoutDay {
   day: string;
@@ -56,30 +63,39 @@ export const WeeklySchedule = () => {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {weeklySchedule.map((schedule) => (
-        <Card key={schedule.day} className="animate-fade-in">
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <span>{schedule.day}</span>
-              <span className="text-sm text-muted-foreground">{schedule.muscles}</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2">
-              {schedule.workouts.map((workout) => (
-                <li key={workout} className="flex items-center justify-between">
-                  <span>{workout}</span>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={() => handleAddWorkout(schedule.day, workout)}
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+        <Sheet key={schedule.day}>
+          <SheetTrigger className="w-full">
+            <Card className="animate-fade-in hover:bg-card/80 transition-colors cursor-pointer">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <span>{schedule.day}</span>
+                  <span className="text-sm text-muted-foreground">{schedule.muscles}</span>
+                </CardTitle>
+              </CardHeader>
+            </Card>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>{schedule.day} - {schedule.muscles}</SheetTitle>
+            </SheetHeader>
+            <div className="mt-6">
+              <ul className="space-y-4">
+                {schedule.workouts.map((workout) => (
+                  <li key={workout} className="flex items-center justify-between p-2 rounded-lg bg-card">
+                    <span>{workout}</span>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleAddWorkout(schedule.day, workout)}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </SheetContent>
+        </Sheet>
       ))}
     </div>
   );
