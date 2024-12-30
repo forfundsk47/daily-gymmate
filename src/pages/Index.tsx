@@ -1,6 +1,7 @@
 import { WorkoutCard } from "@/components/WorkoutCard";
 import { StreakCounter } from "@/components/StreakCounter";
 import { MusicPlayer } from "@/components/MusicPlayer";
+import { WeeklySchedule } from "@/components/WeeklySchedule";
 import { Bell } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect } from "react";
@@ -31,25 +32,33 @@ const Index = () => {
           <StreakCounter count={5} />
         </div>
 
-        <div className="grid gap-4">
-          <WorkoutCard
-            title="Morning Cardio"
-            duration="45 min"
-            calories={320}
-            date="Today"
-          />
-          <WorkoutCard
-            title="Strength Training"
-            duration="60 min"
-            calories={450}
-            date="Yesterday"
-          />
-          <WorkoutCard
-            title="HIIT Session"
-            duration="30 min"
-            calories={280}
-            date="2 days ago"
-          />
+        <div className="mb-12">
+          <h2 className="mb-6 text-2xl font-semibold">Weekly Schedule</h2>
+          <WeeklySchedule />
+        </div>
+
+        <div className="mt-12">
+          <h2 className="mb-6 text-2xl font-semibold">Recent Workouts</h2>
+          <div className="grid gap-4">
+            <WorkoutCard
+              title="Morning Cardio"
+              duration="45 min"
+              calories={320}
+              date="Today"
+            />
+            <WorkoutCard
+              title="Strength Training"
+              duration="60 min"
+              calories={450}
+              date="Yesterday"
+            />
+            <WorkoutCard
+              title="HIIT Session"
+              duration="30 min"
+              calories={280}
+              date="2 days ago"
+            />
+          </div>
         </div>
       </div>
       <MusicPlayer />
